@@ -1,0 +1,41 @@
+									System programming concepts
+Chương này sẽ bao gồm nhiều chủ đề mà là những điều kiện tiên quyết cho việc lập trình hệ thống.
+Chúng ta sẽ bắt đầu bằng việc giới thiệu về system call và đi vào chi tiết các bước xảy ra trong
+suốt quá trình thực thi.
+Chúng ta sẽ xem đến library function và chúng khác với system call thế nào
+
+3.1. System call
+	System call là một điểm vào được điều khiển vào trong kernel, cho phép một tiến trình 
+để request tới kernel nhằm việc thể hiện một số hành động trong để thay cho process.
+	Kernel sẽ tạo ra một tập hợp các services có thể truy cập tới chương trình trong qua API.
+	Một vài điểm chung chúng ta cần lưu ý:
+		- System call thay đổi trạng thái của bộ xử lý từ user mode tới kernel mode -> CPU có thể
+		truy cập được vào trong bộ nhớ kernel
+		- Tập hợp các system calls thì là cố định. Mỗi system call thì được nhận diện bởi một con số
+		đặc biệt
+		- Mỗi system call có thể có một tập hợp các tham số, những tham số này chỉ định thông tin được 
+		truyền tải đến người dùng.
+		
+	Việc gọi system call thì về cơ bản cũng chông giống như việc gọi hàm trong C 
+
+
+3.2. Library function
+	Library function đơn giản là vô số các function cái mà cấu thành một thư viện C tiêu chuẩn
+	Mục đích của những hàm này thì vô cùng phong phú, bao gồm các tác vụ như mở file,....
+	Nhiều library function thì sẽ không cần sử dụng đến system call. Mặt khác, một số hàm thư viện
+	thì sẽ nằm ở bên trên của system call. VD hàm fopen() thì sẽ sử dụng system call open() để có 
+	thể mở file.
+	Các function library sẽ được thiết kế để có thể cung cấp thêm giao diện thân thiện với người dùng. 
+	printf() in C -> write() in system call
+	malloc() vs free() in C -> brk() in system call
+3.3. The standard C Library; The GNU C Library (glibc)
+	Có một vài cách thiết kế cho thư viện C tiêu chuẩn trong các bản thiết kế UNIX. Bản thiết kế được sử 
+	dụng nhiều nhất trong Linux là GNU.
+	*) Determine the vesion of glibc on the system
+
+3.4. Handling Error from System Calls and Library Functions
+	Hầu hết các system call và các library function thì đều trả về các giá trị trạng thái để chỉ ra rằng
+liệu rằng việc gọi hàm thành công hay thất bại.
+	Các giá trị này thì luôn luôn được kiểm tra.
+	*) Handling system call errors
+		
